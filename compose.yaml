@@ -1,6 +1,8 @@
 services:
   app:
     build: .
+    networks:
+      net:
     ports:
       - "${APP_PORT:-3000}:3000"
     volumes:
@@ -11,3 +13,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.lockpick-chall.tls.certresolver: "le"
       traefik.http.routers.lockpick-chall.rule: "Host(`${APP_DOMAIN}`)"
+
+networks:
+  net:
+    external: true
