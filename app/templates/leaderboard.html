@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block head %}<title>
+  CYBH4T$ Lockpick Challenge · Leaderboard</title
+><meta http-equiv="refresh" content="5" />{% endblock %} {% block content %}
+<main class="mx-auto min-h-screen max-w-6xl px-5 py-5 sm:px-10 sm:py-7">
+  <header class="flex items-center border-b border-line pb-4">
+    <a href="/" class="flex items-center gap-3"
+      ><span
+        class="text-sm font-semibold uppercase tracking-[0.22em] text-zinc-300"
+        >CYBH4T$ Lockpick Challenge</span
+      ></a
+    >
+  </header>
+  <section class="py-7 sm:py-9">
+    <h1 class="font-serif text-4xl tracking-[-0.03em] sm:text-6xl">
+      Leaderboard
+    </h1>
+  </section>
+  <section aria-live="polite">
+    {% if entries %}
+    <ol class="space-y-2">
+      {% for entry in entries %}{% set rank = loop.index %}{% set minutes =
+      (entry.duration_ms // 60000) %}{% set seconds = ((entry.duration_ms //
+      1000) % 60) %}{% set centiseconds = ((entry.duration_ms // 10) % 100) %}
+      <li
+        class="flex items-center gap-3 rounded-lg border px-4 py-2.5 sm:px-5 {% if rank == 1 %}border-lime/60 bg-lime/[0.08]{% elif rank <= 3 %}border-zinc-600{% else %}border-line{% endif %}"
+      >
+        <span
+          class="w-7 text-sm {% if rank == 1 %}text-lime{% elif rank <= 3 %}text-zinc-300{% else %}text-zinc-600{% endif %}"
+          >{{ '%02d'|format(rank) }}</span
+        ><span class="min-w-0 flex-1 truncate font-serif text-lg sm:text-xl"
+          >{{ entry.name or 'Anonymous' }}</span
+        ><span
+          class="text-base tabular-nums sm:text-lg {% if rank == 1 %}text-lime{% else %}text-zinc-200{% endif %}"
+          >{{ '%02d'|format(minutes) }}:{{ '%02d'|format(seconds) }}.{{
+          '%02d'|format(centiseconds) }}</span
+        >
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <div
+      class="rounded-lg border border-line px-5 py-8 text-center text-sm text-zinc-500"
+    >
+      No results yet, be the first to try!
+    </div>
+    {% endif %}
+  </section>
+  <footer
+    class="mt-7 flex justify-end border-t border-line pt-3 text-[10px] uppercase tracking-[0.2em] text-zinc-600"
+  >
+    <span>Auto-refresh · 5s</span>
+  </footer>
+</main>
+{% endblock %}

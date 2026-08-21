@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block head %}{% endblock %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#08090b",
+              panel: "#111317",
+              line: "#272a31",
+              lime: "#d8ff55",
+            },
+            fontFamily: {
+              mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+              serif: ['"DM Serif Text"', "Georgia", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="min-h-screen bg-ink font-mono text-white antialiased selection:bg-lime selection:text-ink"
+  >
+    {% block content %}{% endblock %}
+  </body>
+</html>

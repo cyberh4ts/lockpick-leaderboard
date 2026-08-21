@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      - "${APP_STORAGE:-./data}:/app/data"
+    env_file:
+      - .env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.lockpick-chall.tls.certresolver: "le"
+      traefik.http.routers.lockpick-chall.rule: "Host(`${APP_DOMAIN}`)"
